@@ -1,0 +1,45 @@
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 12px;
+  gap: 10px;
+}
+
+.timer-pill, .score-pill, .counter-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 5px 14px;
+  backdrop-filter: blur(6px);
+}
+
+.timer-icon, .score-icon {
+  font-size: 1rem;
+}
+
+.timer-val, .score-val {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3rem;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  letter-spacing: 1px;
+}
+
+.score-icon-img { 
+  width: 22px; 
+  height: 22px; 
+  object-fit: contain; 
+}
+.score-val  { color: #4ade80; }
+
+.counter-text {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #e0e7ff;
+}

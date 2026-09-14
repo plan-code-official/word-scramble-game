@@ -1,0 +1,31 @@
+/* ── Global Reset ─────────────────────────────────────────────────────── */
+:root {
+  --theme-bg-deep: #060b19; /* Deep Navy */
+  --theme-bg-card: rgba(11, 19, 36, 0.85); /* Deep Navy transparent */
+  --theme-text-silver: #e2e8f0; /* Silver / White */
+  --theme-text-muted: #94a3b8; /* Dimmed Silver */
+  --theme-cyan: #00f0ff; /* Bright Cyan */
+  --theme-cyan-hover: #00d2df;
+  --theme-cyan-dim: rgba(0, 240, 255, 0.2);
+  --theme-border-silver: rgba(226, 232, 240, 0.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+  direction: rtl;
+  background-color: var(--theme-bg-deep);
+  color: var(--theme-text-silver);
+}
+
+button { font-family: inherit; }

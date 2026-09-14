@@ -1,0 +1,285 @@
+.gameboard {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background: url('../utils/BG.webp') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Stars ──────────────────────────────────────────────────────────────── */
+.stars-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: none; /* Hide on mobile */
+}
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* ── Floating planets ───────────────────────────────────────────────────── */
+.planet {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0.25;
+  pointer-events: none;
+  animation: floatPlanet ease-in-out infinite;
+}
+
+.planet-1 {
+  top: 8%;
+  left: 5%;
+  animation-duration: 7s;
+  animation-delay: 0s;
+}
+
+.planet-2 {
+  top: 15%;
+  right: 5%;
+  animation-duration: 9s;
+  animation-delay: -3s;
+  font-size: 2.2rem;
+}
+
+.planet-3 {
+  bottom: 12%;
+  left: 8%;
+  animation-duration: 8s;
+  animation-delay: -5s;
+  font-size: 2rem;
+}
+
+@keyframes floatPlanet {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-18px) rotate(8deg);
+  }
+}
+
+/* ── Main content frame ─────────────────────────────────────────────────── */
+.game-frame {
+  position: relative;
+  z-index: 1;
+  width: 92%;
+  max-width: 420px;
+  height: 75vh;
+  max-height: 680px;
+  background: url('../assets/frame-portrait.png') no-repeat center center;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8% 5%;
+}
+
+.game-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .stars-container {
+    display: block; /* Show on large screens */
+  }
+
+  .game-frame {
+    max-width: 900px;
+    height: auto;
+    max-height: 85vh;
+    aspect-ratio: 1024 / 621;
+    background: url('../assets/frame-landscape.png') no-repeat center center;
+    background-size: 100% 100%;
+    padding: 6% 10%;
+  }
+}
+
+/* ── Target section ─────────────────────────────────────────────────────── */
+.target-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Progress line ──────────────────────────────────────────────────────── */
+.progress-line-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  overflow: hidden;
+  margin-top: 0;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.progress-line-fill {
+  height: 100%;
+  background: #00f0ff;
+  border-radius: 0;
+  box-shadow: 0 0 8px #00f0ff, 0 0 15px #00f0ff;
+  transition: width 0.4s ease-out;
+}
+
+/* ── Status Card & Error Screen ─────────────────────────────────────────── */
+.status-card {
+  position: relative;
+  z-index: 10;
+  background: var(--theme-bg-card);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--theme-cyan-dim);
+  border-radius: 24px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 360px;
+  width: 88%;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  color: var(--theme-text-silver);
+  font-family: 'Cairo', sans-serif;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #8b5cf6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.status-msg {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--theme-text-silver);
+}
+
+.error-card {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.error-icon {
+  font-size: 2.5rem;
+}
+
+.error-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #fca5a5;
+  margin: 0;
+}
+
+.error-msg {
+  font-size: 0.95rem;
+  color: #fed7aa;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.error-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.action-btn {
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.retry-btn {
+  background: var(--theme-cyan);
+  color: var(--theme-bg-deep);
+}
+.retry-btn:hover { background: var(--theme-cyan-hover); transform: scale(1.02); }
+
+.demo-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--theme-text-silver);
+  border: 1px solid var(--theme-border-silver);
+}
+.demo-btn:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.02); }
+
+/* ── Submitting Overlay ─────────────────────────────────────────────────── */
+.submitting-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: var(--theme-bg-card);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--theme-cyan);
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .game-content {
+    gap: 18px;
+    padding: 16px 12px;
+  }
+
+  .planet {
+    font-size: 2rem;
+    opacity: 0.18;
+  }
+}
