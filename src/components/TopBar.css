@@ -5,6 +5,7 @@
   width: 100%;
   padding: 0 12px;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .timer-pill, .score-pill, .counter-pill {
@@ -24,7 +25,7 @@
 
 .timer-val, .score-val {
   font-family: 'Fredoka One', cursive;
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
   color: #fff;
   text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   letter-spacing: 1px;
@@ -40,6 +41,6 @@
 .counter-text {
   font-family: 'Cairo', sans-serif;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 3vw, 0.95rem);
   color: #e0e7ff;
 }

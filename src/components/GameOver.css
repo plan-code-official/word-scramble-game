@@ -14,11 +14,11 @@
   background: var(--theme-bg-card);
   border: 3px solid var(--theme-cyan-dim);
   border-radius: 28px;
-  padding: 32px 28px;
+  padding: clamp(20px, 5vw, 32px) clamp(16px, 5vw, 28px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: clamp(12px, 3vw, 18px);
   max-width: 400px;
   width: 90%;
   box-shadow: 0 20px 60px rgba(0,0,0,0.6);
@@ -27,8 +27,8 @@
 
 .stars-row-display {
   display: flex;
-  gap: 8px;
-  font-size: 2.2rem;
+  gap: clamp(4px, 1.5vw, 8px);
+  font-size: clamp(1.8rem, 6vw, 2.2rem);
   margin-bottom: -10px;
 }
 
@@ -43,13 +43,13 @@
 }
 
 .medal {
-  font-size: 3.8rem;
+  font-size: clamp(2.8rem, 8vw, 3.8rem);
   animation: spinIn 0.7s ease;
 }
 
 .gameover-title {
   font-family: 'Cairo', sans-serif;
-  font-size: 1.7rem;
+  font-size: clamp(1.4rem, 5vw, 1.7rem);
   font-weight: 900;
   color: var(--theme-text-silver);
   text-shadow: 0 2px 8px rgba(0,0,0,0.4);
@@ -59,8 +59,8 @@
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+  gap: clamp(6px, 2vw, 10px);
   width: 100%;
 }
 
@@ -84,14 +84,14 @@
 
 .stat-num {
   font-family: 'Fredoka One', cursive;
-  font-size: 1.6rem;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
   color: var(--theme-cyan);
   line-height: 1;
 }
 
 .stat-label {
   font-family: 'Cairo', sans-serif;
-  font-size: 0.72rem;
+  font-size: clamp(0.65rem, 2vw, 0.72rem);
   color: rgba(255,255,255,0.55);
   font-weight: 600;
   text-align: center;
