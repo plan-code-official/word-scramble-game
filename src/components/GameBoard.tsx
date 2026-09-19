@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGameLogic } from '../hooks/useGameLogic';
 import TopBar from './TopBar';
 import TargetWord from './TargetWord';
 import LetterBlocks from './LetterBlocks';
 import GameOver from './GameOver';
+import WelcomeScreen from './WelcomeScreen';
 import './GameBoard.css';
 
 const GameBoard: React.FC = () => {
+  const [hasStarted, setHasStarted] = useState(false);
+
   const {
     state,
     currentWord,
@@ -18,6 +21,12 @@ const GameBoard: React.FC = () => {
     loadDemoMode,
     retryInit,
   } = useGameLogic();
+
+  useEffect(() => {
+    if (state.isLoading) {
+      setHasStarted(false);
+    }
+  }, [state.isLoading]);
 
   if (state.isLoading) {
     return (
@@ -48,6 +57,18 @@ const GameBoard: React.FC = () => {
             </button>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (!hasStarted) {
+    return (
+      <div className="gameboard">
+        <Stars />
+        <WelcomeScreen 
+          totalQuestions={totalWords} 
+          onStart={() => setHasStarted(true)} 
+        />
       </div>
     );
   }
