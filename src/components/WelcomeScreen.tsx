@@ -35,6 +35,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ totalQuestions, onStart }
           onClick={onStart}
           style={{ backgroundImage: `url(${startButtonImg})` }}
         >
+          ابدأ
         </button>
       </div>
     </div>

@@ -31,6 +31,7 @@ export function useGameLogic() {
     checkResult: null,
     phase: 'playing',
     correctCount: 0,
+    wrongCount: 0,
     isLoading: true,
     error: null,
     token: null,
@@ -82,6 +83,7 @@ export function useGameLogic() {
         checkResult: null,
         phase: 'playing',
         correctCount: 0,
+        wrongCount: 0,
         isLoading: false,
         error: null,
         token: null,
@@ -140,6 +142,7 @@ export function useGameLogic() {
         checkResult: null,
         phase: 'playing',
         correctCount: 0,
+        wrongCount: 0,
         isLoading: false,
         error: null,
         token,
@@ -287,6 +290,7 @@ export function useGameLogic() {
           slots: newSlots,
           phase: 'wrong',
           checkResult: 'wrong',
+          wrongCount: (p.wrongCount || 0) + 1,
         }));
       }
     } else {

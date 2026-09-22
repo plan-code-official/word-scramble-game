@@ -93,6 +93,7 @@ export interface GameState {
   checkResult: CheckResult;
   phase: 'playing' | 'correct' | 'wrong' | 'submitting' | 'game-over';
   correctCount: number;
+  wrongCount?: number;
   isLoading: boolean;
   error: string | null;
   token: string | null;

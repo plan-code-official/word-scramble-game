@@ -44,6 +44,7 @@ export const WORDS: WordItem[] = RAW_WORDS.map((w, idx) => ({
   ...w,
   questionId: idx + 1,
   letters: splitToLetters(w.word),
+  points: 25,
 }));
 
 export function getGameWords(count = 10): WordItem[] {

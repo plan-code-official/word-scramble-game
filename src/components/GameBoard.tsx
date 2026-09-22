@@ -3,12 +3,15 @@ import { useGameLogic } from '../hooks/useGameLogic';
 import TopBar from './TopBar';
 import TargetWord from './TargetWord';
 import LetterBlocks from './LetterBlocks';
-import GameOver from './GameOver';
 import WelcomeScreen from './WelcomeScreen';
+import Celebration from '../Celebration/Celebration';
+import ResultsPanel from '../ResultsPanel/ResultsPanel';
 import './GameBoard.css';
 
 const GameBoard: React.FC = () => {
   const [hasStarted, setHasStarted] = useState(false);
+  const [showCelebration, setShowCelebration] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
   const {
     state,
@@ -25,8 +28,36 @@ const GameBoard: React.FC = () => {
   useEffect(() => {
     if (state.isLoading) {
       setHasStarted(false);
+      setShowCelebration(false);
+      setShowResults(false);
     }
   }, [state.isLoading]);
+
+  // Trigger celebration on win
+  useEffect(() => {
+    if (state.phase === 'game-over' && !showResults) {
+      setShowCelebration(true);
+    }
+  }, [state.phase, showResults]);
+
+  // Handle transition from Celebration to Results
+  const handleCelebrationComplete = () => {
+    setShowCelebration(false);
+    setShowResults(true);
+  };
+
+  const handleRetry = () => {
+    setShowResults(false);
+    setShowCelebration(false);
+    restart();
+  };
+
+  const handleBack = () => {
+    console.log('Go to menu');
+    if (window.history.length > 1) {
+      window.history.back();
+    }
+  };
 
   if (state.isLoading) {
     return (
@@ -73,20 +104,8 @@ const GameBoard: React.FC = () => {
     );
   }
 
-  if (state.phase === 'game-over') {
-    return (
-      <div className="gameboard">
-        <Stars />
-        <GameOver
-          score={state.score}
-          totalWords={totalWords}
-          correctCount={state.correctCount}
-          completedData={state.completedData}
-          onRestart={restart}
-        />
-      </div>
-    );
-  }
+  const finalScore = state.completedData ? state.completedData.score : state.score;
+  const coinsEarned = state.completedData ? state.completedData.coins : (state.score * 2);
 
   return (
     <div className="gameboard">
@@ -94,7 +113,7 @@ const GameBoard: React.FC = () => {
       <div className="progress-line-container">
         <div 
           className="progress-line-fill" 
-          style={{ width: `${((state.currentIndex + 1) / totalWords) * 100}%` }}
+          style={{ width: `${((Math.min(state.currentIndex, totalWords - 1) + 1) / totalWords) * 100}%` }}
         />
       </div>
       <Stars />
@@ -139,6 +158,24 @@ const GameBoard: React.FC = () => {
           />
         </div>
       </div>
+
+      {/* End Game Overlays */}
+      <Celebration 
+        isVisible={showCelebration} 
+        onComplete={handleCelebrationComplete} 
+      />
+
+      {showResults && (
+        <ResultsPanel
+          score={finalScore}
+          totalScore={100}
+          correctAnswers={state.correctCount}
+          wrongAnswers={state.wrongCount || 0}
+          coins={coinsEarned}
+          onRetry={handleRetry}
+          onBack={handleBack}
+        />
+      )}
     </div>
   );
 };
