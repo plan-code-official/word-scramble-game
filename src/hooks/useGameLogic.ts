@@ -268,7 +268,7 @@ export function useGameLogic() {
       const word = currentState.words[currentState.currentIndex]?.word;
       if (formed === word) {
         playCorrect();
-        const currentPoints = currentState.words[currentState.currentIndex]?.points ?? 1;
+        const currentPoints = 1; // Override API points (which is often 10) to increment by 1
         setTimeout(() => advanceToNext(), CORRECT_DISPLAY_MS);
         setState(p => ({
           ...p,

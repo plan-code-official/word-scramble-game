@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 // @ts-ignore
-import { ResultsPanel as ResultsPanelClass } from '../../ResultsPanel/ResultsPanel/ResultsPanel.js';
+import { ResultsPanel as ResultsPanelClass } from './ResultsPanel.js';
 
 export interface ResultsPanelProps {
   score: number;

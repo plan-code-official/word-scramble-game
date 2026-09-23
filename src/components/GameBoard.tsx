@@ -4,8 +4,8 @@ import TopBar from './TopBar';
 import TargetWord from './TargetWord';
 import LetterBlocks from './LetterBlocks';
 import WelcomeScreen from './WelcomeScreen';
-import Celebration from '../Celebration/Celebration';
-import ResultsPanel from '../ResultsPanel/ResultsPanel';
+import Celebration from '../Celebration/CelebrationWrapper';
+import ResultsPanel from '../ResultsPanel/ResultsPanelWrapper';
 import './GameBoard.css';
 
 const GameBoard: React.FC = () => {
@@ -59,48 +59,14 @@ const GameBoard: React.FC = () => {
     }
   };
 
-  if (state.isLoading) {
+  if (!hasStarted || state.isLoading || state.error) {
     return (
-      <div className="gameboard">
-        <Stars />
-        <div className="status-card">
-          <div className="spinner" />
-          <p className="status-msg">جاري تحميل الأسئلة وبدء الجلسة...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (state.error) {
-    return (
-      <div className="gameboard">
-        <Stars />
-        <div className="status-card error-card">
-          <div className="error-icon">⚠️</div>
-          <h2 className="error-title">تعذر بدء اللعبة</h2>
-          <p className="error-msg">{state.error}</p>
-          <div className="error-actions">
-            <button className="action-btn retry-btn" onClick={retryInit}>
-              🔄 إعادة المحاولة
-            </button>
-            <button className="action-btn demo-btn" onClick={loadDemoMode}>
-              🎮 تجربة اللعبة (Demo)
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!hasStarted) {
-    return (
-      <div className="gameboard">
-        <Stars />
-        <WelcomeScreen 
-          totalQuestions={totalWords} 
-          onStart={() => setHasStarted(true)} 
-        />
-      </div>
+      <WelcomeScreen
+        totalQuestions={totalWords}
+        onStart={() => setHasStarted(true)}
+        isLoading={state.isLoading}
+        error={state.error}
+      />
     );
   }
 

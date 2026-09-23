@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 // @ts-ignore
-import { Celebration as CelebrationClass } from '../../Celebration/Celebration/Celebration.js';
+import { Celebration as CelebrationClass } from './Celebration.js';
 
 export interface CelebrationProps {
   isVisible: boolean;
