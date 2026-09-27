@@ -5,6 +5,8 @@ import coinsImage from './assets/money.png';
 import correctImage from './assets/right.png';
 import wrongImage from './assets/wrong.png';
 import buttonFrame from './assets/boutton.png';
+import exitIconUrl from '../assets/ExitButton.svg';
+import retryIconUrl from '../assets/retry.png';
 
 const numberValue = (value) => {
   const parsed = Number(value);
@@ -88,38 +90,57 @@ export class ResultsPanel {
     retryBtn.type = "button";
     retryBtn.onclick = () => { if (this.onRetry) this.onRetry(); };
     const retryBtnImg = document.createElement("img");
+    retryBtnImg.className = "results-action__bg";
     retryBtnImg.src = buttonFrame;
     retryBtnImg.alt = "";
     retryBtnImg.setAttribute("aria-hidden", "true");
-    const retryIcon = document.createElement("span");
-    retryIcon.setAttribute("aria-hidden", "true");
-    retryIcon.textContent = "↻";
+    
+    const retryGrp = document.createElement("span");
+    retryGrp.className = "results-action__group";
     const retryTxt = document.createElement("span");
+    retryTxt.className = "results-action__text";
     retryTxt.textContent = "ثانِيَةً";
-    retryBtn.append(retryBtnImg, retryIcon, retryTxt);
+    const retryIcon = document.createElement("img");
+    retryIcon.className = "results-action__icon";
+    retryIcon.src = retryIconUrl;
+    retryIcon.alt = "Retry";
+    retryGrp.append(retryTxt, retryIcon);
+    retryBtn.append(retryBtnImg, retryGrp);
 
     // Left button (Second in RTL DOM) -> Exit
     const backBtn = document.createElement("button");
     backBtn.className = "results-action results-action--back";
     backBtn.type = "button";
-    backBtn.onclick = () => { if (this.onBack) this.onBack(); };
+    backBtn.onclick = () => {
+      if (this.onBack) {
+        this.onBack();
+      } else {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = '/'; 
+        }
+      }
+    };
     const backBtnImg = document.createElement("img");
+    backBtnImg.className = "results-action__bg";
     backBtnImg.src = buttonFrame;
     backBtnImg.alt = "";
     backBtnImg.setAttribute("aria-hidden", "true");
+    
     const backGrp = document.createElement("span");
     backGrp.className = "results-action__group";
     const backTxt = document.createElement("span");
+    backTxt.className = "results-action__text";
     backTxt.textContent = "اخرج";
-    // We can use an icon text or an image. Since we don't have the SVG imported easily here without adding an import, we use a unicode icon for exit.
-    const backIcon = document.createElement("span");
-    backIcon.className = "results-action__exit-icon";
-    backIcon.setAttribute("aria-hidden", "true");
-    backIcon.textContent = "⎋"; 
+    const backIcon = document.createElement("img");
+    backIcon.className = "results-action__icon";
+    backIcon.src = exitIconUrl;
+    backIcon.alt = "Exit";
     backGrp.append(backTxt, backIcon);
     backBtn.append(backBtnImg, backGrp);
 
-    actions.append(retryBtn, backBtn);
+    actions.append(backBtn, retryBtn);
     screen.append(panel, actions);
     this.el.append(screen);
   }
