@@ -35,18 +35,15 @@ export class ResultsPanel {
     const content = document.createElement("div");
     content.className = "results-panel__content";
 
-    const titleImg = document.createElement("img");
-    titleImg.className = "results-panel__title";
-    titleImg.src = celebrationTitle;
-    titleImg.alt = "أحسنت";
+    this.titleImg = document.createElement("img");
+    this.titleImg.className = "results-panel__title";
+    this.titleImg.src = celebrationTitle;
+    this.titleImg.alt = "أحسنت";
 
-    const scoreCard = document.createElement("div");
-    scoreCard.className = "results-score-card";
-    const scoreLabel = document.createElement("span");
-    scoreLabel.className = "results-score-card__label";
-    scoreLabel.textContent = "الدَّرَجَةُ";
-    this.scoreText = document.createElement("strong");
-    scoreCard.append(scoreLabel, this.scoreText);
+    this.titleFail = document.createElement("div");
+    this.titleFail.className = "results-panel__fail-title";
+    this.titleFail.textContent = "حاول مرة أخرى!";
+    this.titleFail.style.display = "none";
 
     const stats = document.createElement("div");
     stats.className = "results-stats";
@@ -79,31 +76,13 @@ export class ResultsPanel {
     wrongCard.append(wrongImg, this.wrongText);
 
     stats.append(correctCard, coinsCard, wrongCard);
-    content.append(titleImg, scoreCard, stats);
+    content.append(this.titleImg, this.titleFail, stats);
     panel.append(content);
 
     const actions = document.createElement("div");
     actions.className = "results-actions";
 
-    const backBtn = document.createElement("button");
-    backBtn.className = "results-action results-action--back";
-    backBtn.type = "button";
-    backBtn.onclick = () => { if (this.onBack) this.onBack(); };
-    const backBtnImg = document.createElement("img");
-    backBtnImg.src = buttonFrame;
-    backBtnImg.alt = "";
-    backBtnImg.setAttribute("aria-hidden", "true");
-    const backGrp = document.createElement("span");
-    backGrp.className = "results-action__group";
-    const backTxt = document.createElement("span");
-    backTxt.textContent = "ارْجِعْ";
-    const backIcon = document.createElement("span");
-    backIcon.className = "results-action__exit-icon";
-    backIcon.setAttribute("aria-hidden", "true");
-    backIcon.textContent = "⎋";
-    backGrp.append(backTxt, backIcon);
-    backBtn.append(backBtnImg, backGrp);
-
+    // Right button (First in RTL DOM) -> Retry
     const retryBtn = document.createElement("button");
     retryBtn.className = "results-action results-action--retry";
     retryBtn.type = "button";
@@ -119,22 +98,49 @@ export class ResultsPanel {
     retryTxt.textContent = "ثانِيَةً";
     retryBtn.append(retryBtnImg, retryIcon, retryTxt);
 
-    actions.append(backBtn, retryBtn);
+    // Left button (Second in RTL DOM) -> Exit
+    const backBtn = document.createElement("button");
+    backBtn.className = "results-action results-action--back";
+    backBtn.type = "button";
+    backBtn.onclick = () => { if (this.onBack) this.onBack(); };
+    const backBtnImg = document.createElement("img");
+    backBtnImg.src = buttonFrame;
+    backBtnImg.alt = "";
+    backBtnImg.setAttribute("aria-hidden", "true");
+    const backGrp = document.createElement("span");
+    backGrp.className = "results-action__group";
+    const backTxt = document.createElement("span");
+    backTxt.textContent = "اخرج";
+    // We can use an icon text or an image. Since we don't have the SVG imported easily here without adding an import, we use a unicode icon for exit.
+    const backIcon = document.createElement("span");
+    backIcon.className = "results-action__exit-icon";
+    backIcon.setAttribute("aria-hidden", "true");
+    backIcon.textContent = "⎋"; 
+    backGrp.append(backTxt, backIcon);
+    backBtn.append(backBtnImg, backGrp);
+
+    actions.append(retryBtn, backBtn);
     screen.append(panel, actions);
     this.el.append(screen);
   }
 
   show(data = {}) {
-    const finalScore = numberValue(data.score);
-    const maximumScore = numberValue(data.totalScore) || 100;
     const correct = numberValue(data.correctAnswers);
     const wrong = numberValue(data.wrongAnswers);
     const earnedCoins = numberValue(data.coins);
 
-    this.scoreText.textContent = `${finalScore}/${maximumScore}`;
     this.correctText.textContent = correct;
     this.wrongText.textContent = wrong;
     this.coinsText.textContent = `+${earnedCoins}`;
+
+    const percentage = (correct + wrong) > 0 ? (correct / (correct + wrong)) * 100 : 0;
+    if (percentage < 50) {
+      this.titleImg.style.display = 'none';
+      this.titleFail.style.display = 'block';
+    } else {
+      this.titleImg.style.display = 'block';
+      this.titleFail.style.display = 'none';
+    }
 
     this.root.appendChild(this.el);
   }

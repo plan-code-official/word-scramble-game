@@ -5,29 +5,36 @@ import QuestionNumber from '../assets/QuestionNumber.png';
 import descriptionImg from '../assets/description.png';
 import startButtonImg from '../assets/startButton.png';
 import daddcoinImg from '../assets/daddcoin.webp';
+import ExitButtonIcon from '../assets/ExitButton.svg';
 
 interface WelcomeScreenProps {
   totalQuestions: number;
   onStart: () => void;
   isLoading?: boolean;
   error?: string | null;
+  onExit: () => void;
 }
 
-const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ 
-  totalQuestions, 
+const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
+  totalQuestions,
   onStart,
   isLoading = false,
-  error = null
+  error = null,
+  onExit
 }) => {
   return (
     <div className="welcome-screen-new">
-      <div 
-        className="welcome-stats-bg" 
-        style={{ backgroundImage: `url(${QuestionNumber})` }}
+      <button className="welcome-exit-btn" onClick={onExit} aria-label="Exit Game">
+        <img src={ExitButtonIcon} alt="Exit" />
+      </button>
+
+      <div
+        className="welcome-stats-bg"
+        style={{ backgroundImage: `url(${QuestionNumber})`, padding: '0 20px' }}
       >
         <img src={QuestionCoin} alt="Questions" className="welcome-qcoin" />
         <span className="welcome-stat-text q-count">{totalQuestions}</span>
-        <span className="welcome-stat-arrow">{'>'}</span>
+        <span className="welcome-stat-arrow">{'='}</span>
         <span className="welcome-stat-text xp-count">{totalQuestions}</span>
         <img src={daddcoinImg} alt="Dadd Points" className="welcome-daddcoin" />
       </div>
@@ -37,17 +44,20 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
       </div>
 
       <div className="welcome-footer">
-        {isLoading ? (
-          <div className="welcome-status-msg">جاري تحميل الأسئلة...</div>
-        ) : error ? (
-          <div className="welcome-status-msg error-msg">{error}</div>
+        {error ? (
+          <div className="welcome-status-msg error-msg">عذرا حدث خطأ</div>
         ) : (
-          <button 
-            className="welcome-start-btn" 
-            onClick={onStart}
-            style={{ backgroundImage: `url(${startButtonImg})` }}
+          <button
+            className="welcome-start-btn"
+            onClick={isLoading ? undefined : onStart}
+            style={{
+              backgroundImage: `url(${startButtonImg})`,
+              cursor: isLoading ? 'default' : 'pointer',
+              opacity: isLoading ? 0.8 : 1
+            }}
+            disabled={isLoading}
           >
-            ابدأ!
+            {isLoading ? 'تحميل ...' : 'ابدأ!'}
           </button>
         )}
       </div>

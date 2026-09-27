@@ -35,10 +35,17 @@ const GameBoard: React.FC = () => {
 
   // Trigger celebration on win
   useEffect(() => {
-    if (state.phase === 'game-over' && !showResults) {
-      setShowCelebration(true);
+    if (state.phase === 'game-over' && !showResults && !showCelebration && !state.isLoading) {
+      const totalAttempts = state.correctCount + (state.wrongCount || 0);
+      const percentage = totalAttempts > 0 ? (state.correctCount / totalAttempts) * 100 : 0;
+      
+      if (percentage >= 50) {
+        setShowCelebration(true);
+      } else {
+        setShowResults(true);
+      }
     }
-  }, [state.phase, showResults]);
+  }, [state.phase, showResults, showCelebration, state.correctCount, state.wrongCount, state.isLoading]);
 
   // Handle transition from Celebration to Results
   const handleCelebrationComplete = () => {
@@ -53,7 +60,6 @@ const GameBoard: React.FC = () => {
   };
 
   const handleBack = () => {
-    console.log('Go to menu');
     if (window.history.length > 1) {
       window.history.back();
     }
@@ -66,6 +72,7 @@ const GameBoard: React.FC = () => {
         onStart={() => setHasStarted(true)}
         isLoading={state.isLoading}
         error={state.error}
+        onExit={handleBack}
       />
     );
   }
@@ -75,14 +82,17 @@ const GameBoard: React.FC = () => {
 
   return (
     <div className="gameboard">
-      {/* Progress line at the very top of the background */}
-      <div className="progress-line-container">
-        <div 
-          className="progress-line-fill" 
-          style={{ width: `${((Math.min(state.currentIndex, totalWords - 1) + 1) / totalWords) * 100}%` }}
-        />
-      </div>
       <Stars />
+      
+      {/* Top bar (moved outside game-frame) */}
+      <TopBar
+        currentIndex={state.currentIndex}
+        totalWords={totalWords}
+        score={state.score}
+        elapsedSeconds={state.elapsedSeconds}
+        onExit={handleBack}
+      />
+
       <div className="game-frame">
         <div className="game-content">
           {/* Submitting indicator */}
@@ -93,13 +103,6 @@ const GameBoard: React.FC = () => {
             </div>
           )}
 
-          {/* Top bar */}
-          <TopBar
-            currentIndex={state.currentIndex}
-            totalWords={totalWords}
-            score={state.score}
-            elapsedSeconds={state.elapsedSeconds}
-          />
 
           {/* Target word card */}
           <div className="target-section">
@@ -126,15 +129,15 @@ const GameBoard: React.FC = () => {
       </div>
 
       {/* End Game Overlays */}
-      <Celebration 
-        isVisible={showCelebration} 
-        onComplete={handleCelebrationComplete} 
+      <Celebration
+        isVisible={showCelebration}
+        onComplete={handleCelebrationComplete}
       />
 
       {showResults && (
         <ResultsPanel
-          score={finalScore}
-          totalScore={100}
+          score={state.score}
+          totalScore={totalWords}
           correctAnswers={state.correctCount}
           wrongAnswers={state.wrongCount || 0}
           coins={coinsEarned}

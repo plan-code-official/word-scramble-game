@@ -143,6 +143,10 @@
 }
 
 .result-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-family: 'Cairo', sans-serif;
   font-size: clamp(1.8rem, 6vw, 3rem);
   font-weight: 900;
@@ -199,5 +203,24 @@
   /* Minimal overrides because clamp handles most resizing */
   .letter-blocks-wrapper {
     gap: 12px;
+  }
+}
+
+/* Fix clipping on medium screens (550px - 800px) by shrinking tiles */
+@media (min-width: 500px) and (max-width: 850px) {
+  .letter-tile,
+  .slot-cell {
+    /* Scale down the max size so they fit in a single line more often */
+    width: clamp(34px, 8vw, 50px);
+    height: clamp(34px, 8vw, 50px);
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    border-radius: 8px;
+  }
+  .tiles-row {
+    gap: 8px;
+  }
+  .slots-row {
+    gap: 6px;
+    padding: 6px;
   }
 }

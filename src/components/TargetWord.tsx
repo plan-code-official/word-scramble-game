@@ -104,58 +104,36 @@ const TargetWord: React.FC<TargetWordProps> = ({
   const promptToRender = displayQuestion || displayHint;
 
   const renderContent = () => {
-    if (imageUrl) {
-      return (
-        <>
+    return (
+      <>
+        {promptToRender && (
+          <div className="target-prompt" style={{ marginBottom: imageUrl ? '8px' : '0' }}>
+            {promptToRender}
+          </div>
+        )}
+
+        {imageUrl && (
           <div className="target-image-wrapper" onClick={handleOpenPortal} title="انقر لتكبير الصورة">
             <img src={imageUrl} alt="Question" className="target-image clickable-image" />
-            {promptToRender && (
-              <div className="image-caption-overlay">
-                {promptToRender}
-              </div>
-            )}
             <div className="zoom-badge">
               <ExpandIcon />
             </div>
           </div>
-          {audioUrl && (
-            <button className="audio-play-btn" onClick={playAudio} type="button">
-              <span className="audio-wave-icon" aria-hidden="true">🔊</span>
-              <span>استمع للصوت</span>
-            </button>
-          )}
-        </>
-      );
-    }
+        )}
 
-    if (audioUrl) {
-      return (
-        <button 
-          className="audio-play-btn" 
-          onClick={playAudio} 
-          type="button" 
-          style={{ flexDirection: 'column', padding: '12px 24px', gap: '4px' }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {audioUrl && (
+          <button 
+            className="audio-play-btn" 
+            onClick={playAudio} 
+            type="button"
+            style={{ marginTop: (imageUrl || promptToRender) ? '8px' : '0' }}
+          >
             <span className="audio-wave-icon" aria-hidden="true">🔊</span>
             <span>استمع للصوت</span>
-          </div>
-          {promptToRender && (
-             <span style={{ fontSize: '1.2rem', marginTop: '4px' }}>{promptToRender}</span>
-          )}
-        </button>
-      );
-    }
-
-    if (promptToRender) {
-      return (
-        <div className="target-prompt">
-          {promptToRender}
-        </div>
-      );
-    }
-
-    return null;
+          </button>
+        )}
+      </>
+    );
   };
 
   return (

@@ -71,7 +71,24 @@ const LetterBlocks: React.FC<LetterBlocksProps> = ({
       {checkResult && (
         <div className="result-modal-overlay">
           <div className={`result-modal-content ${checkResult === 'correct' ? 'correct-msg' : 'wrong-msg'}`}>
-            {checkResult === 'correct' ? 'أحسنت!' : 'حاول مرة أخرى!'}
+            {checkResult === 'correct' ? (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div>أحسنت!</div>
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '8px' }}>
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+
+              </div>
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div> خطأ </div>
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '8px' }}>
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+
+              </div>
+            )}
           </div>
         </div>
       )}

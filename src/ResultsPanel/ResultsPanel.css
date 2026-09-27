@@ -37,10 +37,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: clamp(18px, 4vh, 52px) clamp(18px, 4vw, 82px) clamp(18px, 3.2vh, 34px);
-  gap: clamp(10px, 2vw, 28px);
-  transform: translateY(clamp(-40px, -4vh, -12px));
+  justify-content: center;
+  padding: 6% 8%;
+  gap: clamp(10px, 3vw, 24px);
+}
+
+.results-panel__fail-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  margin: 0;
+  text-align: center;
+  line-height: 1.2;
+  animation: resultsItemIn 440ms 120ms ease-out both;
 }
 
 .results-panel__title {
@@ -96,48 +107,48 @@
 .results-stats {
   width: 100%;
   max-width: min(90%, 820px);
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(10px, 2vw, 32px);
+  display: flex;
+  justify-content: center;
+  gap: clamp(10px, 4vw, 32px);
   direction: ltr;
   animation: resultsItemIn 510ms 270ms ease-out both;
 }
 
 .results-stat-card {
-  width: min(100%, 240px);
-  justify-self: center;
+  width: 31%;
+  max-width: 240px;
   min-height: 0;
   aspect-ratio: 1 / 1.05;
-  border-radius: clamp(18px, 3vw, 44px);
-  display: grid;
-  grid-template-rows: 54% 27% 19%;
-  place-items: center;
-  padding: clamp(8px, 1.1vw, 18px) clamp(8px, 1vw, 16px);
+  border-radius: clamp(12px, 3vw, 44px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(6px, 1.5vw, 16px);
   text-align: center;
 }
 
 .results-stat-card img {
   display: block;
   width: auto;
-  height: 86%;
-  max-width: 88%;
-  max-height: none;
+  height: 45%;
+  max-height: 60px;
   object-fit: contain;
-  align-self: end;
+  margin-bottom: 8px;
 }
 
 .results-stat-card strong {
   font-family: Cairo, sans-serif;
-  font-size: clamp(1.75rem, 4.4vw, 3.65rem);
+  font-size: clamp(0.9rem, 4vw, 3rem);
   line-height: 1;
   font-weight: 900;
 }
 
 .results-stat-card span {
-  margin-top: clamp(2px, 0.8vh, 8px);
+  margin-top: 4px;
   color: #f9d00f;
   font-family: Cairo, sans-serif;
-  font-size: clamp(1rem, 2.7vw, 2.1rem);
+  font-size: clamp(0.7rem, 2.5vw, 1.8rem);
   font-weight: 900;
   line-height: 1;
 }
@@ -145,7 +156,7 @@
 .results-stat-card--correct strong { color: #63ff5d; }
 .results-stat-card--wrong strong { color: #ff5d5c; }
 .results-stat-card--coins strong { color: #f9d00f; }
-.results-stat-card--coins img { height: 90%; max-width: 96%; }
+.results-stat-card--coins img { height: 42%; max-height: 55px; }
 .results-stat-card--coins { direction: rtl; }
 
 .results-actions {
@@ -160,9 +171,8 @@
 .results-action {
   position: relative;
   flex: 1 1 0;
-  width: min(32vw, 360px);
+  width: 100%;
   max-width: 360px;
-  min-width: clamp(140px, 26vw, 220px);
   aspect-ratio: 3 / 1;
   border: 0;
   padding: 0;
