@@ -54,22 +54,12 @@ export function useGameLogic() {
     const token = searchParams.get('token');
     const lessonId = searchParams.get('lessonId');
 
+    const isDemoParam = searchParams.get('demo') === 'true';
+
     answersRef.current = [];
 
-    // If missing token or lessonId and not forcedDemo, show error screen with Demo option
-    if ((!token || !lessonId) && !forcedDemo) {
-      setState(p => ({
-        ...p,
-        isLoading: false,
-        token: null,
-        lessonId: null,
-        error: 'لم يتم العثور على رمز التوثيق (token) أو معرف الدرس (lessonId) في رابط اللعبة.',
-      }));
-      return;
-    }
-
     // Demo Mode
-    if (forcedDemo || (!token && !lessonId)) {
+    if (forcedDemo || isDemoParam) {
       const demoWords = getGameWords(4);
       const first = demoWords[0];
       questionStartTimeRef.current = Date.now();
@@ -92,6 +82,18 @@ export function useGameLogic() {
         completedData: null,
         isDemo: true,
       });
+      return;
+    }
+
+    // If missing token or lessonId, show error screen
+    if (!token || !lessonId) {
+      setState(p => ({
+        ...p,
+        isLoading: false,
+        token: null,
+        lessonId: null,
+        error: 'لم يتم العثور على رمز التوثيق (token) أو معرف الدرس (lessonId) في رابط اللعبة.',
+      }));
       return;
     }
 
@@ -209,7 +211,7 @@ export function useGameLogic() {
   }, []);
 
   /* ── Advance to next word ────────────────────────────────────────────── */
-  const advanceToNext = useCallback(() => {
+  const advanceToNext = useCallback((submittedWord?: string) => {
     const currentState = stateRef.current;
     const timeTaken = Math.max(1, Math.round((Date.now() - questionStartTimeRef.current) / 1000));
     const currentWord = currentState.words[currentState.currentIndex];
@@ -217,7 +219,7 @@ export function useGameLogic() {
     if (currentWord) {
       answersRef.current.push({
         questionId: Number(currentWord.questionId) || (currentState.currentIndex + 1),
-        selectedAnswer: String(currentWord.word),
+        selectedAnswer: submittedWord !== undefined ? submittedWord : String(currentWord.word),
         timeTaken,
       });
     }
@@ -269,7 +271,7 @@ export function useGameLogic() {
       if (formed === word) {
         playCorrect();
         const currentPoints = 1; // Override API points (which is often 10) to increment by 1
-        setTimeout(() => advanceToNext(), CORRECT_DISPLAY_MS);
+        setTimeout(() => advanceToNext(formed), CORRECT_DISPLAY_MS);
         setState(p => ({
           ...p,
           tiles: newTiles,
@@ -281,9 +283,7 @@ export function useGameLogic() {
         }));
       } else {
         playWrong();
-        setTimeout(() => {
-          setState(s => (s.phase === 'wrong' ? { ...s, phase: 'playing', checkResult: null } : s));
-        }, WRONG_DISPLAY_MS);
+        setTimeout(() => advanceToNext(formed), WRONG_DISPLAY_MS);
         setState(p => ({
           ...p,
           tiles: newTiles,

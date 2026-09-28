@@ -141,20 +141,22 @@
   }
 }
 
-/* Landscape Mode Adjustments for smaller devices */
-@media (max-height: 500px) and (orientation: landscape) {
+/* Landscape Mode / Short Height Adjustments */
+@media (max-height: 520px) {
   .game-frame {
-    /* In landscape, width is wider, so constrain by height instead */
+    /* On short heights, constrain by height and allow fluid width */
     aspect-ratio: unset;
-    width: clamp(400px, 95vw, 900px);
-    height: 94vh;
-    padding: 5% 3%;
+    width: min(96vw, 900px);
+    height: 95vh;
+    max-height: 95vh;
+    padding: 3% 3%;
   }
   .planet {
     display: none;
   }
   .game-content {
-    gap: clamp(4px, 1vh, 8px);
+    gap: clamp(3px, 0.8vh, 6px);
+    justify-content: space-evenly;
   }
 }
 
@@ -302,15 +304,32 @@
   font-weight: 800;
 }
 
-/* ── Responsive: shrink content on very small screens ─────────────────────── */
-@media (max-width: 480px) {
+/* ── Small screens: 500px and lower ─────────────────────────────────────── */
+@media (max-width: 500px) {
+  .gameboard {
+    padding: clamp(4px, 1vh, 8px) 6px;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .game-frame {
+    width: min(94vw, calc((100dvh - 85px) * (400 / 722)));
+    max-width: 420px;
+    max-height: calc(100dvh - 80px);
+    aspect-ratio: 400 / 722;
+    padding: 6.5% 4.8%;
+  }
+
   .game-content {
     gap: clamp(4px, 1.2vh, 10px);
+    justify-content: space-evenly;
   }
 
   .planet {
     font-size: clamp(1.2rem, 4vw, 1.8rem);
-    opacity: 0.18;
+    opacity: 0.15;
   }
 }
 
@@ -318,9 +337,9 @@
 @media (max-width: 320px) {
   .game-frame {
     width: 98vw;
-    padding: 6% 6%;
+    padding: 5% 3.5%;
   }
   .game-content {
-    gap: 4px;
+    gap: clamp(2px, 0.8vh, 4px);
   }
 }

@@ -1,81 +1,95 @@
 .target-card {
   background: var(--theme-bg-card);
   backdrop-filter: blur(8px);
-  border-radius: 20px;
-  padding: 14px 20px;
+  border-radius: clamp(12px, 2.5vw, 20px);
+  padding: clamp(8px, 1.8vh, 16px) clamp(10px, 3vw, 20px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: clamp(6px, 1.2vh, 12px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   border: 2px solid var(--theme-cyan-dim);
-  width: 95%;
-  max-width: 380px;
+  width: 96%;
+  max-width: 550px;
+  max-height: 48vh;
   animation: fadeIn 0.4s ease;
   box-sizing: border-box;
+  flex-shrink: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* ── Image styling ───────────────────────────────────────────────────────── */
 .target-image-wrapper {
   width: 100%;
+  height: clamp(80px, 19vh, 220px);
+  max-height: 25vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: clamp(120px, 25vh, 250px);
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: clamp(8px, 1.5vw, 14px);
   position: relative;
   cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 1;
+  min-height: 0;
 }
 
 .target-image {
   max-width: 100%;
-  max-height: clamp(120px, 25vh, 250px);
+  height: 100%;
+  width: 100%;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: clamp(6px, 1.2vw, 12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .clickable-image:hover {
-  transform: scale(1.03);
-  filter: brightness(1.1);
+  transform: scale(1.02);
+  filter: brightness(1.08);
 }
 
 .zoom-badge {
   position: absolute;
   bottom: 6px;
   right: 8px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(4px);
   color: #fff;
-  font-size: 0.85rem;
+  font-size: clamp(0.7rem, 1.8vw, 0.85rem);
   padding: 3px 6px;
   border-radius: 8px;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ── Audio play button ──────────────────────────────────────────────────── */
 .audio-play-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: var(--theme-cyan);
   color: var(--theme-bg-deep);
   border: 1px solid var(--theme-border-silver);
-  border-radius: 24px;
-  padding: 8px 20px;
+  border-radius: 20px;
+  padding: clamp(4px, 0.9vh, 8px) clamp(12px, 2.5vw, 20px);
   font-family: 'Cairo', sans-serif;
-  font-size: 0.95rem;
+  font-size: clamp(0.78rem, min(2vw, 2vh), 0.92rem);
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 4px 14px var(--theme-cyan-dim);
   transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  flex-shrink: 0;
 }
 
 .audio-play-btn:hover {
-  transform: translateY(-2px) scale(1.03);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 6px 18px var(--theme-cyan-dim);
   background: var(--theme-cyan-hover);
 }
@@ -85,7 +99,7 @@
 }
 
 .audio-wave-icon {
-  font-size: 1.2rem;
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
   animation: pulseAudio 1.5s infinite;
 }
 
@@ -99,19 +113,19 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(0, 0, 20, 0.85);
+  background: rgba(0, 0, 20, 0.88);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 16px;
   animation: fadeInPortal 0.25s ease;
   cursor: pointer;
 }
 
 .image-portal-content {
   position: relative;
-  max-width: 90vw;
+  max-width: 92vw;
   max-height: 90vh;
   display: flex;
   align-items: center;
@@ -121,8 +135,8 @@
 }
 
 .portal-image {
-  max-width: 85vw;
-  max-height: 80vh;
+  max-width: 88vw;
+  max-height: 82vh;
   object-fit: contain;
   border-radius: 16px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
@@ -131,15 +145,15 @@
 
 .portal-close-btn {
   position: absolute;
-  top: -18px;
-  right: -18px;
-  width: 40px;
-  height: 40px;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: #ef4444;
   color: #ffffff;
   border: 2px solid #ffffff;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -165,31 +179,96 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
+  from { opacity: 0; transform: scale(0.97); }
   to   { opacity: 1; transform: scale(1); }
-}
-
-/* ── Mobile adjustments ──────────────────────────────────────────────────── */
-@media (max-width: 480px) {
-  .target-card {
-    padding: 10px 14px;
-    gap: 8px;
-  }
-
-  .audio-play-btn {
-    padding: 6px 16px;
-    font-size: 0.88rem;
-  }
 }
 
 /* ── Text Prompt ────────────────────────────────────────────────────────── */
 .target-prompt {
   font-family: 'Cairo', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--theme-text-silver);
+  font-size: clamp(1.3rem, min(5.5vw, 3.8vh), 2.2rem);
+  font-weight: 900;
+  color: #ffffff;
   text-align: center;
-  margin-top: 5px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 14px rgba(0, 240, 255, 0.3);
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.35;
+  max-width: 100%;
+}
+
+/* ── Short height screens (Landscape mobile, height <= 520px) ────────────── */
+@media (max-height: 520px) {
+  .target-card {
+    padding: 4px 10px;
+    gap: 4px;
+    border-radius: 12px;
+    max-height: 42vh;
+  }
+
+  .target-image-wrapper {
+    height: clamp(50px, 15vh, 90px);
+    max-height: 18vh;
+    border-radius: 8px;
+  }
+
+  .target-prompt {
+    font-size: clamp(1.05rem, 4.5vh, 1.35rem);
+    line-height: 1.25;
+    margin-top: 0;
+  }
+
+  .audio-play-btn {
+    padding: 3px 10px;
+    font-size: 0.78rem;
+    gap: 4px;
+  }
+}
+
+/* ── Small screens: 500px and lower ─────────────────────────────────────── */
+@media (max-width: 500px) {
+  .target-card {
+    width: 98%;
+    padding: clamp(6px, 1.2vh, 10px) clamp(8px, 2vw, 14px);
+    gap: clamp(4px, 1vh, 8px);
+    border-radius: 14px;
+    max-height: 42vh;
+  }
+
+  .target-image-wrapper {
+    height: clamp(65px, min(16vh, 32vw), 130px);
+    max-height: 18vh;
+    border-radius: 8px;
+  }
+
+  .target-prompt {
+    font-size: clamp(1.1rem, min(4.8vw, 2.8vh), 1.55rem);
+    line-height: 1.25;
+    padding: 0 4px;
+  }
+
+  .audio-play-btn {
+    padding: 3px 12px;
+    font-size: clamp(0.74rem, 3.2vw, 0.86rem);
+    gap: 4px;
+  }
+}
+
+/* ── Extremely narrow screens (width <= 320px, e.g. 280px) ───────────────── */
+@media (max-width: 320px) {
+  .target-card {
+    padding: 6px 8px;
+    gap: 4px;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .target-image-wrapper {
+    height: clamp(70px, 16vh, 120px);
+  }
+
+  .target-prompt {
+    font-size: clamp(1.15rem, 5vw, 1.4rem);
+  }
 }
 

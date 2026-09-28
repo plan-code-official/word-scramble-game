@@ -116,7 +116,42 @@
   transition: width 0.4s ease-out;
 }
 
-/* ── Small screens ─────────────────────────────────────────────────────── */
+/* ── Small screens: 500px and lower ─────────────────────────────────────── */
+@media (max-width: 500px) {
+  .top-bar {
+    width: min(94vw, calc((100dvh - 85px) * (400 / 722)));
+    max-width: 420px;
+    padding: 6px 12px;
+    margin-top: clamp(6px, 1.2vh, 12px);
+    margin-bottom: clamp(6px, 1.2vh, 10px);
+    gap: 6px;
+    border-radius: 10px;
+  }
+
+  .tb-coin-img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tb-coin-val {
+    font-size: 1.05rem;
+  }
+
+  .tb-label {
+    font-size: 0.78rem;
+  }
+
+  .tb-counter {
+    font-size: 0.95rem;
+  }
+
+  .tb-exit-btn img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ── Extremely narrow screens: 320px ───────────────────────────────────── */
 @media (max-width: 320px) {
   .tb-coins {
     padding: 3px 8px 3px 4px;

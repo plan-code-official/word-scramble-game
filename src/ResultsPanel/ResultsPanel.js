@@ -5,8 +5,8 @@ import coinsImage from './assets/money.png';
 import correctImage from './assets/right.png';
 import wrongImage from './assets/wrong.png';
 import buttonFrame from './assets/boutton.png';
-import exitIconUrl from '../assets/ExitButton.svg';
-import retryIconUrl from '../assets/retry.png';
+import exitBtnImage from '../assets/exit.png';
+import retryBtnImage from '../assets/retry.png';
 
 const numberValue = (value) => {
   const parsed = Number(value);
@@ -84,30 +84,19 @@ export class ResultsPanel {
     const actions = document.createElement("div");
     actions.className = "results-actions";
 
-    // Right button (First in RTL DOM) -> Retry
+    // Right button (Retry)
     const retryBtn = document.createElement("button");
     retryBtn.className = "results-action results-action--retry";
     retryBtn.type = "button";
     retryBtn.onclick = () => { if (this.onRetry) this.onRetry(); };
     const retryBtnImg = document.createElement("img");
     retryBtnImg.className = "results-action__bg";
-    retryBtnImg.src = buttonFrame;
-    retryBtnImg.alt = "";
+    retryBtnImg.src = retryBtnImage;
+    retryBtnImg.alt = "Retry";
     retryBtnImg.setAttribute("aria-hidden", "true");
-    
-    const retryGrp = document.createElement("span");
-    retryGrp.className = "results-action__group";
-    const retryTxt = document.createElement("span");
-    retryTxt.className = "results-action__text";
-    retryTxt.textContent = "ثانِيَةً";
-    const retryIcon = document.createElement("img");
-    retryIcon.className = "results-action__icon";
-    retryIcon.src = retryIconUrl;
-    retryIcon.alt = "Retry";
-    retryGrp.append(retryTxt, retryIcon);
-    retryBtn.append(retryBtnImg, retryGrp);
+    retryBtn.append(retryBtnImg);
 
-    // Left button (Second in RTL DOM) -> Exit
+    // Left button (Exit)
     const backBtn = document.createElement("button");
     backBtn.className = "results-action results-action--back";
     backBtn.type = "button";
@@ -124,21 +113,10 @@ export class ResultsPanel {
     };
     const backBtnImg = document.createElement("img");
     backBtnImg.className = "results-action__bg";
-    backBtnImg.src = buttonFrame;
-    backBtnImg.alt = "";
+    backBtnImg.src = exitBtnImage;
+    backBtnImg.alt = "Exit";
     backBtnImg.setAttribute("aria-hidden", "true");
-    
-    const backGrp = document.createElement("span");
-    backGrp.className = "results-action__group";
-    const backTxt = document.createElement("span");
-    backTxt.className = "results-action__text";
-    backTxt.textContent = "اخرج";
-    const backIcon = document.createElement("img");
-    backIcon.className = "results-action__icon";
-    backIcon.src = exitIconUrl;
-    backIcon.alt = "Exit";
-    backGrp.append(backTxt, backIcon);
-    backBtn.append(backBtnImg, backGrp);
+    backBtn.append(backBtnImg);
 
     actions.append(backBtn, retryBtn);
     screen.append(panel, actions);

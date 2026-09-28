@@ -1,0 +1,247 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   GameWelcomeScreen (GWS) Component Stylesheet
+   Prefix: .gws-
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Root Container ──────────────────────────────────────────────────── */
+.gws-screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #060b19;
+  z-index: 50;
+  direction: rtl;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+
+/* ── 2. Header: Stats Badge (Absolute, Top-Left) ────────────────────────── */
+.gws-header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: auto;
+  height: 60px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  direction: ltr;
+}
+
+.gws-stats-bg {
+  min-width: 250px;
+  height: 100%;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 25px;
+  box-sizing: border-box;
+  direction: ltr; /* left icon → number = yellow number → right icon */
+  gap: 15px;
+}
+
+.gws-stat-icon {
+  width: clamp(22px, 5vw, 35px);
+  height: clamp(22px, 5vw, 35px);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.gws-stat-text {
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.gws-stat-right-val {
+  color: #f9d00f;
+}
+
+.gws-stat-arrow {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 2px;
+}
+
+/* ── 3. Body: Hero / Description Image ──────────────────────────────────── */
+.gws-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-top: auto;
+  margin-bottom: auto;
+  box-sizing: border-box;
+}
+
+.gws-hero-img {
+  width: 95%;
+  max-width: clamp(350px, 90vw, 1000px);
+  max-height: clamp(250px, 60vh, 550px);
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+  transform: translateY(-5px);
+  transition: transform 0.3s ease, filter 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.gws-hero-img:hover {
+  transform: translateY(-5px) scale(1.02);
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));
+}
+
+/* ── 4. Footer: Action Buttons ──────────────────────────────────────────── */
+.gws-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8vh;
+  box-sizing: border-box;
+}
+
+.gws-footer-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(30px, 6vw, 60px);
+  direction: rtl;
+}
+
+.gws-btn {
+  position: relative;
+  width: clamp(160px, 30vw, 280px);
+  height: clamp(55px, 10vw, 90px);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.18s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.gws-exit-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.gws-start-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.gws-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.gws-btn-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gws-btn-loading-text {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  font-family: 'Cairo', system-ui, sans-serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.9rem);
+  font-weight: 900;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.gws-btn-disabled {
+  opacity: 0.7;
+  cursor: default !important;
+}
+
+.gws-status-msg {
+  color: #ffffff;
+  font-family: 'Cairo', system-ui, sans-serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.gws-error-msg {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  padding: 8px 20px;
+  border-radius: 14px;
+}
+
+/* ── 5. Responsive Overrides ──────────────────────────────────────────── */
+
+/* Mobile / Touch screens */
+@media (max-width: 950px) {
+  .gws-hero-img {
+    max-width: 600px;
+    max-height: 60vh;
+  }
+}
+
+/* Short Landscape screens */
+@media (max-width: 900px) and (max-height: 500px) {
+  .gws-screen {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .gws-header {
+    top: 5px;
+    left: 10px;
+    right: auto;
+    height: 40px;
+  }
+
+  .gws-stats-bg {
+    min-width: 180px;
+    height: 40px;
+  }
+
+  .gws-stat-text,
+  .gws-stat-arrow {
+    font-size: 14px;
+  }
+
+  .gws-hero-img {
+    max-width: 350px;
+    max-height: 60vh;
+  }
+
+  .gws-btn {
+    width: clamp(150px, 25vw, 180px);
+    height: clamp(50px, 8vw, 65px);
+  }
+}

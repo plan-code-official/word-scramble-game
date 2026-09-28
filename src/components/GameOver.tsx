@@ -44,7 +44,7 @@ const GameOver: React.FC<GameOverProps> = ({
       <div className="gameover-card">
         <div className="stars-row-display">{starIcons}</div>
         <div className="medal">{medal}</div>
-        <h2 className="gameover-title">{msg}</h2>
+        <h2 className={`gameover-title ${percentage < 50 ? 'gameover-title--fail' : ''}`}>{msg}</h2>
 
         <div className="stats-grid">
           <div className="stat-box">
