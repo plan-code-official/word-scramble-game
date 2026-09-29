@@ -99,7 +99,13 @@
 }
 
 .audio-wave-icon {
-  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  width: clamp(1.1rem, 2.5vw, 1.35rem);
+  height: clamp(1.1rem, 2.5vw, 1.35rem);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   animation: pulseAudio 1.5s infinite;
 }
 
@@ -271,4 +277,3 @@
     font-size: clamp(1.15rem, 5vw, 1.4rem);
   }
 }
-

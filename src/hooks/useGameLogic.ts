@@ -124,8 +124,8 @@ export function useGameLogic() {
           letters: [...targetWord],
           hint: q.hint || null,
           questionText: q.question ? q.question.trim() : null,
-          imageUrl: q.imageUrl || null,
-          audioUrl: q.audioUrl || null,
+          imageUrl: q.imageUrl || q.options?.find((option) => option.imageUrl)?.imageUrl || null,
+          audioUrl: q.audioUrl || q.options?.find((option) => option.audioUrl)?.audioUrl || null,
           points: q.points ?? 10,
           timeLimit: q.timeLimit ?? 60,
         };

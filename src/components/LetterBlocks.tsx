@@ -191,23 +191,11 @@ const LetterBlocks: React.FC<LetterBlocksProps> = ({
       {/* ── Result message Modal ────────────────────────────────────────── */}
       {checkResult && (
         <div className="result-modal-overlay">
-          <div className={`result-modal-content ${checkResult === 'correct' ? 'correct-msg' : 'wrong-msg'}`}>
-            {checkResult === 'correct' ? (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                <div>أحسنت!</div>
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                <div> خطأ </div>
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </div>
-            )}
+          <div className={`answer-feedback-card ${checkResult === 'correct' ? 'answer-feedback-card--success' : 'answer-feedback-card--wrong'}`} dir="rtl">
+            <svg className="answer-feedback__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              {checkResult === 'correct' ? <><circle cx="12" cy="12" r="9" /><path d="m8 12 2.5 2.5L16 9" /></> : <><circle cx="12" cy="12" r="9" /><path d="m9 9 6 6m0-6-6 6" /></>}
+            </svg>
+            <span className="answer-feedback__text">{checkResult === 'correct' ? 'أحسنت!' : 'خطأ'}</span>
           </div>
         </div>
       )}

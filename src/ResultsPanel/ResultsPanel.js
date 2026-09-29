@@ -4,7 +4,6 @@ import celebrationTitle from './assets/good.png';
 import coinsImage from './assets/money.png';
 import correctImage from './assets/right.png';
 import wrongImage from './assets/wrong.png';
-import buttonFrame from './assets/boutton.png';
 import exitBtnImage from '../assets/exit.png';
 import retryBtnImage from '../assets/retry.png';
 
@@ -33,6 +32,12 @@ export class ResultsPanel {
     const panel = document.createElement("div");
     panel.className = "results-panel";
     panel.style.setProperty("--results-panel-image", `url(${panelFrame})`);
+    const panelFrameImg = document.createElement("img");
+    panelFrameImg.className = "results-panel__frame";
+    panelFrameImg.src = panelFrame;
+    panelFrameImg.alt = "";
+    panelFrameImg.setAttribute("aria-hidden", "true");
+    panel.append(panelFrameImg);
 
     const content = document.createElement("div");
     content.className = "results-panel__content";

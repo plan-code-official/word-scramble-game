@@ -101,7 +101,7 @@ const GameBoard: React.FC = () => {
           {state.phase === 'submitting' && (
             <div className="submitting-overlay">
               <div className="spinner" />
-              <p>جاري تسجيل النتائج...</p>
+              <p>تحميل</p>
             </div>
           )}
 

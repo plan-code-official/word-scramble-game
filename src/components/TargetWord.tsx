@@ -128,7 +128,7 @@ const TargetWord: React.FC<TargetWordProps> = ({
             type="button"
             style={{ marginTop: (imageUrl || promptToRender) ? '8px' : '0' }}
           >
-            <span className="audio-wave-icon" aria-hidden="true">🔊</span>
+            <svg className="audio-wave-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l4 3V7l-4 3H4Z"/><path d="M15 9a4 4 0 0 1 0 6M17.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>
             <span>استمع للصوت</span>
           </button>
         )}
