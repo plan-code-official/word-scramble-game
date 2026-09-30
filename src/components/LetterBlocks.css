@@ -211,8 +211,9 @@
   direction: rtl;
   align-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: fit-content;
   max-width: 100%;
+  margin-inline: auto;
 }
 
 .tile-available {
