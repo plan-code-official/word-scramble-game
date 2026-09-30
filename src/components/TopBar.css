@@ -62,16 +62,16 @@
 
 .tb-label {
   font-family: 'Lateef', sans-serif;
-  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  font-size: clamp(1.1rem, 3.8vw, 1.55rem);
   font-weight: 700;
   color: #e0e7ff;
   line-height: 1.2;
 }
 
 .tb-counter {
-  font-family: 'Fredoka One', cursive;
-  font-size: clamp(0.9rem, 3vw, 1.1rem);
-  color: #71D9FF;
+  font-family: 'Lateef', sans-serif;
+  font-size: clamp(1.15rem, 3.8vw, 1.5rem);
+  color: #ffffff;
   letter-spacing: 1px;
   line-height: 1.2;
 }
