@@ -209,7 +209,7 @@
   text-align: center;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
   color: var(--theme-text-silver);
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Lateef', sans-serif;
 }
 
 .spinner {
@@ -262,7 +262,7 @@
 }
 
 .action-btn {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Lateef', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   padding: 10px 20px;
@@ -299,7 +299,7 @@
   justify-content: center;
   gap: 14px;
   color: var(--theme-cyan);
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Lateef', sans-serif;
   font-size: 1.2rem;
   font-weight: 800;
 }

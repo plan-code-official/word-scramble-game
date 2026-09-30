@@ -79,7 +79,7 @@
   border: 1px solid var(--theme-border-silver);
   border-radius: 20px;
   padding: clamp(4px, 0.9vh, 8px) clamp(12px, 2.5vw, 20px);
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Lateef', sans-serif;
   font-size: clamp(0.78rem, min(2vw, 2vh), 0.92rem);
   font-weight: 800;
   cursor: pointer;
@@ -191,7 +191,7 @@
 
 /* ── Text Prompt ────────────────────────────────────────────────────────── */
 .target-prompt {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Lateef', sans-serif;
   font-size: clamp(1.3rem, min(5.5vw, 3.8vh), 2.2rem);
   font-weight: 900;
   color: #ffffff;

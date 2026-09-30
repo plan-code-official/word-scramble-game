@@ -48,7 +48,7 @@
 }
 
 .gameover-title {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Lateef', sans-serif;
   font-size: clamp(1.4rem, 5vw, 1.7rem);
   font-weight: 900;
   color: var(--theme-text-silver);
@@ -95,7 +95,7 @@
 }
 
 .stat-label {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Lateef', sans-serif;
   font-size: clamp(0.65rem, 2vw, 0.72rem);
   color: rgba(255,255,255,0.55);
   font-weight: 600;
@@ -103,7 +103,7 @@
 }
 
 .restart-btn {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Lateef', sans-serif;
   font-size: 1.1rem;
   font-weight: 800;
   padding: 12px 32px;
