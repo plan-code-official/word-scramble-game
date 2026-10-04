@@ -5,7 +5,7 @@ import TargetWord from './TargetWord';
 import LetterBlocks from './LetterBlocks';
 import WelcomeScreen from './WelcomeScreen';
 import Celebration from '../Celebration/CelebrationWrapper';
-import ResultsPanel from '../ResultsPanel/ResultsPanelWrapper';
+import ResultsPanel from '../ResultsPanel/ResultsPanel';
 import './GameBoard.css';
 
 const GameBoard: React.FC = () => {
@@ -138,8 +138,6 @@ const GameBoard: React.FC = () => {
 
       {showResults && (
         <ResultsPanel
-          score={state.score}
-          totalScore={totalWords}
           correctAnswers={state.correctCount}
           wrongAnswers={state.wrongCount || 0}
           coins={coinsEarned}
