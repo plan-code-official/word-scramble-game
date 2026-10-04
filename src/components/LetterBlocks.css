@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   direction: rtl;
   gap: clamp(4px, 1.2vw, 10px);
   width: 100%;
@@ -36,7 +36,10 @@
 .slots-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
   flex: 1 1 auto;
   min-width: 0;
   justify-content: flex-start;
@@ -52,7 +55,7 @@
 /* ── Shared tile/slot base ──────────────────────────────────────────────── */
 .letter-tile,
 .slot-cell {
-  flex: 0 1 clamp(34px, min(12.5vw, 7.8vh), 72px);
+  flex: 0 0 clamp(34px, min(12.5vw, 7.8vh), 72px);
   width: clamp(34px, min(12.5vw, 7.8vh), 72px);
   height: clamp(34px, min(12.5vw, 7.8vh), 72px);
   aspect-ratio: 1 / 1;
@@ -207,11 +210,13 @@
 /* ── Scrambled tiles ────────────────────────────────────────────────────── */
 .tiles-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   gap: clamp(4px, 1.4vw, 10px);
   justify-content: flex-start;
   direction: rtl;
-  align-content: flex-start;
   align-items: center;
   width: 100%;
   max-width: 100%;
@@ -410,14 +415,14 @@
   .answers-row {
     gap: clamp(3px, 1vw, 6px);
     max-width: 100%;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .slots-row {
     gap: clamp(2px, 0.8vw, 5px);
     padding: 2px;
     max-width: 100%;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .slot-cell {
@@ -515,4 +520,9 @@
     gap: 4px;
     padding: 4px;
   }
+}
+
+.slots-row::-webkit-scrollbar,
+.tiles-row::-webkit-scrollbar {
+  display: none;
 }
