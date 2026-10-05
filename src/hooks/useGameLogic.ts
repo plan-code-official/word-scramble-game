@@ -85,14 +85,14 @@ export function useGameLogic() {
       return;
     }
 
-    // If missing token or lessonId, show error screen
-    if (!token || !lessonId) {
+    // If missing lessonId, show error screen
+    if (!lessonId) {
       setState(p => ({
         ...p,
         isLoading: false,
         token: null,
         lessonId: null,
-        error: 'لم يتم العثور على رمز التوثيق (token) أو معرف الدرس (lessonId) في رابط اللعبة.',
+        error: 'لم يتم العثور على معرف الدرس (lessonId) في رابط اللعبة.',
       }));
       return;
     }
@@ -182,7 +182,7 @@ export function useGameLogic() {
   /* ── Finish game & submit session ────────────────────────────────────── */
   const finishGameSession = useCallback(async (token: string | null, sessionId: string | null) => {
     playWin();
-    if (!token || !sessionId) {
+    if (!sessionId) {
       // Demo Mode or Missing session: transition directly to game-over
       setState(p => ({ ...p, phase: 'game-over' }));
       return;
@@ -191,10 +191,10 @@ export function useGameLogic() {
     setState(p => ({ ...p, phase: 'submitting' }));
     try {
       // Submit accumulated answers
-      await submitAnswers(token, sessionId, answersRef.current);
+      await submitAnswers(token || '', sessionId, answersRef.current);
 
       // Complete session
-      const completedData = await completeSession(token, sessionId);
+      const completedData = await completeSession(token || '', sessionId);
       setState(p => ({
         ...p,
         phase: 'game-over',
