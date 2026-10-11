@@ -4,6 +4,7 @@ import TopBar from './TopBar';
 import TargetWord from './TargetWord';
 import LetterBlocks from './LetterBlocks';
 import WelcomeScreen from './WelcomeScreen';
+import ErrorScreen from './ErrorScreen';
 import Celebration from '../Celebration/CelebrationWrapper';
 import ResultsPanel from '../ResultsPanel/ResultsPanel';
 import './GameBoard.css';
@@ -67,13 +68,26 @@ const GameBoard: React.FC = () => {
     }
   };
 
-  if (!hasStarted || state.isLoading || state.error) {
+  if (state.error || (!state.isLoading && !hasStarted && totalWords === 0)) {
+    return (
+      <ErrorScreen
+        onExit={handleBack}
+        description={
+          state.error?.toLowerCase().includes('lessonid')
+            ? 'لا يمكننا العثور على الدرس المطلوب. يرجى التأكد من الرابط أو العودة للرئيسية.'
+            : (state.error || 'لا يمكننا العثور على هذه الصفحة. دعنا نذهب إلى مكان مألوف.')
+        }
+      />
+    );
+  }
+
+  if (!hasStarted || state.isLoading) {
     return (
       <WelcomeScreen
         totalQuestions={totalWords}
         onStart={() => setHasStarted(true)}
         isLoading={state.isLoading}
-        error={state.error}
+        error={null}
         onExit={handleBack}
       />
     );

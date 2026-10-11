@@ -1,6 +1,7 @@
 import React from 'react';
 import GameWelcomeScreen from './GameWelcomeScreen/GameWelcomeScreen';
 
+import ErrorScreen from './ErrorScreen';
 import bgImg from '../utils/BG.webp';
 import badgeBG from '../assets/QuestionNumber.png';
 import qCoin from '../assets/QuestionCoin.png';
@@ -27,7 +28,16 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   const isReady = totalQuestions > 0;
 
   if (error) {
-    return <div className="welcome-error font-arabic" dir="rtl" style={{ textAlign: 'center', padding: '20px' }}>عذرا حدث خطأ: {error}</div>;
+    return (
+      <ErrorScreen
+        onExit={onExit}
+        description={
+          error.toLowerCase().includes('lessonid')
+            ? 'لا يمكننا العثور على الدرس المطلوب. يرجى التأكد من الرابط أو العودة للرئيسية.'
+            : error
+        }
+      />
+    );
   }
 
   return (

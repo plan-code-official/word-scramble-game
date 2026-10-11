@@ -1,30 +1,38 @@
 .target-card {
   background: var(--theme-bg-card);
-  backdrop-filter: blur(8px);
-  border-radius: clamp(12px, 2.5vw, 20px);
-  padding: clamp(8px, 1.8vh, 16px) clamp(10px, 3vw, 20px);
+  backdrop-filter: blur(10px);
+  border-radius: clamp(14px, 2.5vw, 22px);
+  padding: clamp(8px, 1.8vh, 16px) clamp(14px, 3vw, 24px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: clamp(6px, 1.2vh, 12px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
   border: 2px solid var(--theme-cyan-dim);
-  width: 96%;
-  max-width: 550px;
-  max-height: 48vh;
+  width: min(92%, 680px);
+  max-width: min(92%, 680px);
+  max-height: 46vh;
   animation: fadeIn 0.4s ease;
   box-sizing: border-box;
   flex-shrink: 1;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .target-card {
+    width: min(86%, 640px);
+    max-width: min(86%, 640px);
+  }
 }
 
 /* ── Image styling ───────────────────────────────────────────────────────── */
 .target-image-wrapper {
   width: 100%;
-  height: clamp(80px, 19vh, 220px);
-  max-height: 25vh;
+  max-width: 440px;
+  height: clamp(75px, 18vh, 200px);
+  max-height: 22vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +40,7 @@
   border-radius: clamp(8px, 1.5vw, 14px);
   position: relative;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.25);
   flex-shrink: 1;
   min-height: 0;
 }
@@ -191,42 +199,46 @@
 
 /* ── Text Prompt ────────────────────────────────────────────────────────── */
 .target-prompt {
-  font-family: 'Lateef', sans-serif;
-  font-size: clamp(1.3rem, min(5.5vw, 3.8vh), 2.2rem);
-  font-weight: 900;
+  font-family: 'Cairo', sans-serif;
+  font-size: clamp(1.2rem, min(4.8vw, 3.2vh), 2.1rem);
+  font-weight: 700;
   color: #ffffff;
   text-align: center;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 14px rgba(0, 240, 255, 0.3);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 240, 255, 0.35);
   word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-wrap: balance;
   white-space: normal;
-  line-height: 1.35;
+  line-height: 1.38;
   max-width: 100%;
+  padding: 0 4px;
+  box-sizing: border-box;
 }
 
 /* ── Short height screens (Landscape mobile, height <= 520px) ────────────── */
 @media (max-height: 520px) {
   .target-card {
-    padding: 4px 10px;
+    padding: 4px 12px;
     gap: 4px;
     border-radius: 12px;
-    max-height: 42vh;
+    max-height: 40vh;
   }
 
   .target-image-wrapper {
-    height: clamp(50px, 15vh, 90px);
-    max-height: 18vh;
+    height: clamp(50px, 14vh, 85px);
+    max-height: 16vh;
     border-radius: 8px;
   }
 
   .target-prompt {
-    font-size: clamp(1.05rem, 4.5vh, 1.35rem);
+    font-size: clamp(1.05rem, 4.2vh, 1.35rem);
     line-height: 1.25;
     margin-top: 0;
   }
 
   .audio-play-btn {
-    padding: 3px 10px;
-    font-size: 0.78rem;
+    padding: 3px 12px;
+    font-size: 0.8rem;
     gap: 4px;
   }
 }
@@ -234,8 +246,8 @@
 /* ── Small screens: 500px and lower ─────────────────────────────────────── */
 @media (max-width: 500px) {
   .target-card {
-    width: 98%;
-    padding: clamp(6px, 1.2vh, 10px) clamp(8px, 2vw, 14px);
+    width: 100%;
+    padding: clamp(6px, 1.4vh, 12px) clamp(10px, 2.5vw, 16px);
     gap: clamp(4px, 1vh, 8px);
     border-radius: 14px;
     max-height: 42vh;
@@ -248,15 +260,15 @@
   }
 
   .target-prompt {
-    font-size: clamp(1.1rem, min(4.8vw, 2.8vh), 1.55rem);
-    line-height: 1.25;
+    font-size: clamp(1.15rem, min(4.8vw, 2.8vh), 1.6rem);
+    line-height: 1.3;
     padding: 0 4px;
   }
 
   .audio-play-btn {
-    padding: 3px 12px;
-    font-size: clamp(0.74rem, 3.2vw, 0.86rem);
-    gap: 4px;
+    padding: 4px 14px;
+    font-size: clamp(0.78rem, 3.2vw, 0.92rem);
+    gap: 5px;
   }
 }
 
@@ -270,10 +282,10 @@
   }
 
   .target-image-wrapper {
-    height: clamp(70px, 16vh, 120px);
+    height: clamp(60px, 15vh, 100px);
   }
 
   .target-prompt {
-    font-size: clamp(1.15rem, 5vw, 1.4rem);
+    font-size: clamp(1.1rem, 4.8vw, 1.3rem);
   }
 }
