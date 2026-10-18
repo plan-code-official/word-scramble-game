@@ -111,15 +111,6 @@ const GameBoard: React.FC = () => {
 
       <div className="game-frame">
         <div className="game-content">
-          {/* Submitting indicator */}
-          {state.phase === 'submitting' && (
-            <div className="submitting-overlay">
-              <div className="spinner" />
-              <p>تحميل</p>
-            </div>
-          )}
-
-
           {/* Target word card */}
           <div className="target-section">
             <TargetWord
@@ -143,6 +134,13 @@ const GameBoard: React.FC = () => {
           />
         </div>
       </div>
+
+      {/* Submitting indicator */}
+      {state.phase === 'submitting' && (
+        <div className="submitting-overlay" aria-busy="true">
+          <div className="submitting-spinner" />
+        </div>
+      )}
 
       {/* End Game Overlays */}
       <Celebration
