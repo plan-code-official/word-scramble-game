@@ -105,9 +105,10 @@
 .delete-btn-wrapper {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: clamp(4px, 1.2vw, 8px);
   flex-shrink: 0;
 }
 
@@ -159,10 +160,11 @@
   opacity: 0.6;
 }
 
-.backspace-icon {
+.backspace-icon,
+.clear-all-icon {
   width: clamp(18px, min(5.5vw, 3.8vh), 28px);
   height: clamp(18px, min(5.5vw, 3.8vh), 28px);
-  stroke-width: 2.5;
+  stroke-width: 2.4;
   transition: transform 0.15s ease;
 }
 
@@ -170,43 +172,8 @@
   transform: translateX(1px);
 }
 
-/* ── Clear All Chip (Non-shifting Floating Badge) ───────────────────────── */
-.clear-all-chip {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(239, 68, 68, 0.2);
-  border: 1px solid rgba(248, 113, 113, 0.45);
-  color: #fca5a5;
-  font-family: 'Lateef', sans-serif;
-  font-size: clamp(0.65rem, 1.8vw, 0.76rem);
-  font-weight: 700;
-  padding: 1px 7px;
-  border-radius: 10px;
-  cursor: pointer;
-  white-space: nowrap;
-  backdrop-filter: blur(4px);
-  transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
-  z-index: 5;
-}
-
-.clear-all-chip.hidden {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-50%) scale(0.9);
-}
-
-.clear-all-chip.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(-50%) scale(1);
-}
-
-.clear-all-chip:hover {
-  background: rgba(239, 68, 68, 0.45);
-  border-color: rgba(248, 113, 113, 0.9);
-  color: #ffffff;
+.delete-btn.can-delete:hover .clear-all-icon {
+  transform: rotate(-8deg) scale(1.08);
 }
 
 /* ── Scrambled tiles ────────────────────────────────────────────────────── */
@@ -465,10 +432,9 @@
     padding: 2px;
   }
 
-  .clear-all-chip {
-    top: calc(100% + 2px);
-    font-size: 0.68rem;
-    padding: 1px 5px;
+  .clear-all-icon {
+    width: clamp(15px, 4.5vh, 22px);
+    height: clamp(15px, 4.5vh, 22px);
   }
 }
 
@@ -509,25 +475,21 @@
 
   .delete-btn-wrapper {
     flex-shrink: 0;
+    gap: clamp(3px, 1vw, 6px);
   }
 
   .delete-btn {
-    width: clamp(30px, min(11vw, 6vh), 52px);
-    height: clamp(30px, min(11vw, 6vh), 52px);
-    min-width: 26px;
-    min-height: 26px;
+    width: clamp(28px, min(10vw, 5.5vh), 48px);
+    height: clamp(28px, min(10vw, 5.5vh), 48px);
+    min-width: 24px;
+    min-height: 24px;
     border-radius: clamp(7px, 1.6vw, 10px);
   }
 
-  .backspace-icon {
-    width: clamp(16px, 4.2vw, 22px);
-    height: clamp(16px, 4.2vw, 22px);
-  }
-
-  .clear-all-chip {
-    top: calc(100% + 2px);
-    font-size: 0.65rem;
-    padding: 1px 6px;
+  .backspace-icon,
+  .clear-all-icon {
+    width: clamp(15px, 4vw, 20px);
+    height: clamp(15px, 4vw, 20px);
   }
 
   .tiles-row {

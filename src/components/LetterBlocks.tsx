@@ -30,6 +30,25 @@ const BackspaceIcon = () => (
   </svg>
 );
 
+const TrashIcon = () => (
+  <svg
+    className="clear-all-icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M3 6h18" />
+    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    <line x1="10" y1="11" x2="10" y2="17" />
+    <line x1="14" y1="11" x2="14" y2="17" />
+  </svg>
+);
+
 const LetterBlocks: React.FC<LetterBlocksProps> = ({
   tiles,
   slots,
@@ -139,35 +158,37 @@ const LetterBlocks: React.FC<LetterBlocksProps> = ({
             ))}
           </div>
 
-          {/* Delete / Backspace Button */}
+          {/* Delete / Backspace & Clear All Action Buttons */}
           <div className="delete-btn-wrapper">
             <button
-              className={`delete-btn ${hasPlacedLetters ? 'can-delete' : 'is-empty'}`}
+              className={`delete-btn delete-letter-btn ${hasPlacedLetters ? 'can-delete' : 'is-empty'}`}
               onPointerDown={handlePointerDown}
               onPointerUp={handlePointerUp}
               onPointerLeave={handlePointerLeave}
               onPointerCancel={handlePointerLeave}
               onClick={handleClick}
               disabled={!hasPlacedLetters || phase !== 'playing'}
-              aria-label="حذف الحرف الأخير (اضغط مطولاً لمسح الكل)"
-              title={hasPlacedLetters ? "حذف الحرف الأخير (اضغط مطولاً لمسح الكل)" : "لا توجد حروف لحذفها"}
+              aria-label="حذف الحرف الأخير"
+              title={hasPlacedLetters ? "حذف الحرف الأخير" : "لا توجد حروف لحذفها"}
               type="button"
             >
               <BackspaceIcon />
             </button>
 
-            {/* Quick Clear All Chip */}
             <button
-              className={`clear-all-chip ${placedCount >= 2 && phase === 'playing' ? 'visible' : 'hidden'}`}
+              className={`delete-btn clear-all-btn ${hasPlacedLetters ? 'can-delete' : 'is-empty'}`}
               onClick={(e) => {
                 e.stopPropagation();
-                onClear();
+                if (hasPlacedLetters && phase === 'playing') {
+                  onClear();
+                }
               }}
+              disabled={!hasPlacedLetters || phase !== 'playing'}
+              aria-label="مسح كل الحروف"
+              title={hasPlacedLetters ? "مسح كل الحروف" : "لا توجد حروف لمسحها"}
               type="button"
-              title="مسح كل الحروف"
-              aria-hidden={placedCount < 2}
             >
-              مسح الكل
+              <TrashIcon />
             </button>
           </div>
         </div>
